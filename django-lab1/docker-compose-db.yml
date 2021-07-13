@@ -1,0 +1,22 @@
+version: '3.7'
+
+networks:
+    core:
+
+services:
+
+    dbalura:
+        image: postgres:12-alpine
+        container_name: dbalura
+        hostname: dbalura
+        environment:
+            - POSTGRES_USER=dbalura
+            - POSTGRES_PASSWORD=dbalura
+            - POSTGRES_DB=dbalura
+        volumes:
+            - /home/scpaes/Dev/django-project/django-lab1/volumes/dbalura/data
+            - /home/scpaes/Dev/django-project/django-lab1/volumes/dbalura/initdb
+        networks:
+            - core
+        ports:
+            - "0.0.0.0:5435:5432"
