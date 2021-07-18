@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
 from usuarios.views import *
 
 def cadastro(request):
@@ -17,16 +18,16 @@ def cadastro(request):
             print('O campo e-mail não pode ficar em branco')
             return redirect(to='cadastro')
         if senha != senha2:
-            print('As senhas não batem')
+            messages.error(request, 'As senhas não batem')
             return redirect(to='cadastro')
 
         if User.objects.filter(email=email).exists():
-            print('Usuário já cadastrado')
+            messages.error(request, 'Usuário já cadastrado')
             return redirect(to='cadastro')
         
         user = User.objects.create_user(username=nome, email=email, password=senha)
         user.save()
-        print('Usuário cadastrado com sucesso')
+        messages.success(request, 'Usuário cadastrado com sucesso')
         return redirect(to='login')
 
     return render(request, 'usuarios/cadastro.html', status=200)

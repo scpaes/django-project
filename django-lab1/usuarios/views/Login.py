@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
-from django.contrib import auth
+from django.contrib import auth, messages
 
 
 def login(request):
@@ -10,7 +10,7 @@ def login(request):
         senha = request.POST.get('senha')
 
         if email == '' or senha == '':
-            print('Os campos de e-mail e senha não podem ser vazios')
+            messages.error(request, 'Os campos de e-mail e senha não podem ser vazios')
             return redirect(to='login')
 
         if User.objects.filter(email=email).exists():
@@ -20,8 +20,9 @@ def login(request):
             if user_auth is not None:
                 auth.login(request, user_auth)
                 return redirect(to='dashboard')
-            return redirect('login')
+            messages.error(request, 'Senha incorreta')
+            return redirect(to='login')
         else:
-            print('Email ou senha estão incorretos')
-            render(request, 'usuarios/login.html', status=401)        
-    return render(request, 'usuarios/login.html', status=200)
+            messages.error(request, 'Email ou senha estão incorretos')
+            render(request, 'usuarios/login.html')        
+    return render(request, 'usuarios/login.html')

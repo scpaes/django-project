@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'receitas',
-    'pessoas',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +66,7 @@ WSGI_APPLICATION = 'alura.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'dbalura',
+        'NAME': 'dbalura',
         'USER': 'dbalura',
         'PASSWORD': 'dbalura',
         'HOST': 'localhost',
@@ -118,7 +117,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'alura/static')
 ]
 
-#Media
+# Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -126,3 +125,11 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Messages tags
+# Messages
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+}
