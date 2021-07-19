@@ -4,6 +4,7 @@ from receitas.models.Receitas import Receitas
 
 
 def criar_receita(request):
+    """Cadastra receita"""
     if request.method == 'POST':
         nome_receita = request.POST['nome_receita']
         ingredientes = request.POST['ingredientes']
@@ -22,4 +23,4 @@ def criar_receita(request):
         )
         receita.save()
         return redirect('dashboard')
-    return render(request, 'usuarios/criar-receita.html', status=200)
+    return render(request, 'receitas/criar-receita.html', status=200)
