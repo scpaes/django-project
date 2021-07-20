@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from passagens.forms import forms
 
 def index(request):
     """Index view"""
-    return render(request, 'index.html')
+    form = forms.PassagemForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'index.html', context)
